@@ -1,0 +1,43 @@
+[{
+    "label": "Option1",
+    "color": "#4acab4",
+    "data": [
+        ["Mar", 188],
+        ["Apr", 183],
+        ["May", 185],
+        ["Jun", 250],
+        ["Jul", 190],
+        ["Aug", 194],
+        ["Sep", 154],
+        ["Oct", 164],
+        ["Nov", 74]
+    ]
+}, {
+    "label": "Option1",
+    "color": "#ffea88",
+    "data": [
+        ["Mar", 153],
+        ["Apr", 116],
+        ["May", 136],
+        ["Jun", 119],
+        ["Jul", 148],
+        ["Aug", 133],
+        ["Sep", 118],
+        ["Oct", 131],
+        ["Nov", 59]
+    ]
+}, {
+    "label": "I do not understand",
+    "color": "#ff8153",
+    "data": [
+        ["Mar", 111],
+        ["Apr", 97],
+        ["May", 93],
+        ["Jun", 110],
+        ["Jul", 102],
+        ["Aug", 93],
+        ["Sep", 92],
+        ["Oct", 92],
+        ["Nov", 44]
+    ]
+}]

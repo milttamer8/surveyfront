@@ -1,0 +1,97 @@
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card card-default">
+            <div class="card-header">
+                <div class="card-title">Your Poll List</div>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-lg-4">
+                        <input type='text' class="form-control" placeholder='Type to filter the title column...' (keyup)='updateFilter($event)' />
+                    </div>
+                </div>
+                <ngx-datatable #table class='bootstrap no-detail-row' [columns]="columns" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="'auto'" [selectionType]="'multi'" [limit]="5" [rows]='rowsFilter' (activate)="onActivate($event)">
+                    <ngx-datatable-column name="Title" [width]="300"></ngx-datatable-column>
+                    <ngx-datatable-column name="Description" [width]="300"></ngx-datatable-column>
+                    <ngx-datatable-column name="Date" [width]="400"></ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!selectedDetails_isHidden" class="col-xl-6">
+        <div class="card card-default">
+            <div class="card-header ">
+                <div class="card-title">
+                    Poll Detail
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <h4>Title</h4>
+                            <div style="margin-left: 20px;">
+                                {{userPollSelected.title}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h4>Description</h4>
+                            <div style="margin-left: 20px;">
+                                {{userPollSelected.description}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h4>Answers</h4>
+                            <div class="c-radio" style="margin-left: 20px;">
+                                <label>
+                                  <span class="fa fa-circle"></span>{{this.pollAnswers.option1}}&nbsp;&nbsp;({{resNumber1}})</label>
+                            </div>
+                            <div class="c-radio" style="margin-left: 20px;">
+                                <label>
+                                  <span class="fa fa-circle"></span>{{this.pollAnswers.option2}}&nbsp;&nbsp;({{resNumber2}})</label>
+                            </div>
+                            <div class="c-radio" style="margin-left: 20px;">
+                                <label>
+                                  <span class="fa fa-circle"></span>I don't understand&nbsp;&nbsp;({{resNumber3}})</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h4>Total Responses</h4>
+                            <div style="margin-left: 20px;">
+                                <h4>{{resNumber1 + resNumber2}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!selectedGraph_isHidden" class="row">
+    <div class="col-xl-6">
+        <div class="card card-default" id="cardChart5">
+            <div class="card-header">
+                <div class="card-title">Pie</div>
+            </div>
+            <div class="card-wrapper">
+                <div class="card-body">
+                    <div flot [dataset]="pieData" [options]="pieOptions" height="300"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="card card-default" id="cardChart4">
+            <div class="card-header">
+                <div class="card-title">Line</div>
+            </div>
+            <div class="card-wrapper">
+                <div class="card-body">
+                    <div flot [dataset]="lineData" [options]="lineOptions" height="300"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card card-default ">
+            <div class="card-header">Create the Poll</div>
+            <div class="card-body">
+                <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input class="form-control" type="text" #titleInput placeholder="Enter a title..." (change)="getTitle($event)" (click)="getTitle($event)" value="{{userPollSelected.title}}" />
+                            <div class="text-danger text-center card bg-warning" style="margin-top: 10px;" *ngIf="!titleEmpty_isHidden">This field required!</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea class="form-control" #descriptionInput placeholder="Enter a description..." rows="5" (change)="getDescription($event)" (click)="getDescription($event)" value="{{userPollSelected.description}}"></textarea>
+                            <div class="text-danger text-center card bg-warning" style="margin-top: 10px;" *ngIf="!descriptionEmpty_isHidden">This field required!</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-muted mb-1">Answer Type</label>
+                            <div class="c-radio">
+                                <label>
+                                  <input type="radio" name="answerType" #defaultOpt value="default" [checked]="true" (change)="getAnswerType($event)">
+                                  <span class="fa fa-circle"></span>Default</label>
+                            </div>
+                            <div class="c-radio">
+                                <label>
+                                  <input type="radio" name="answerType" #customOpt value="custom" (change)="getAnswerType($event)"/>
+                                  <span class="fa fa-circle"></span>Custom</label>
+                            </div>
+                            <div *ngIf="!option_isHidden">
+                                <div class="form-group">
+                                    <label>Option1</label>
+                                    <input class="form-control" type="text" placeholder="Enter a Option1..." (change)="getOption1($event)" (click)="getOption1($event)" value="{{userPollSelected.poll_answers.option1}}" />
+                                    <div class="text-danger text-center card bg-warning" style="margin-top: 10px;" *ngIf="!option1Empty_isHidden">This field required!</div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Option2</label>
+                                    <input class="form-control" type="text" placeholder="Enter a Option2..." (change)="getOption2($event)" (click)="getOption2($event)" value="{{userPollSelected.poll_answers.option2}}" />
+                                    <div class="text-danger text-center card bg-warning" style="margin-top: 10px;" *ngIf="!option2Empty_isHidden">This field required!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-outline-danger float-right" style="margin-left: 10px;" (click)="deletePoll()">Delete Poll</button>
+                <button class="btn btn-outline-info float-right" style="margin-left: 10px;" (click)="updatePoll()">Update Poll</button>
+                <button class="btn btn-outline-success float-right" (click)="createPoll()">Create Poll</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div class="card card-default">
+            <div class="card-header">
+                <div class="card-title">Your Poll List</div>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-lg-4">
+                        <input type='text' class="form-control" placeholder='Type to filter the title column...' (keyup)='updateFilter($event)' />
+                    </div>
+                </div>
+                <ngx-datatable #table class='bootstrap no-detail-row' [columns]="columns" [columnMode]="'force'" [footerHeight]="50" [selectionType]="'multi'" [rowHeight]="'auto'" [limit]="5" [rows]='rowsFilter' (activate)="onActivate($event)">
+                    <ngx-datatable-column name="Title" [width]="300"></ngx-datatable-column>
+                    <ngx-datatable-column name="Description" [width]="300"></ngx-datatable-column>
+                    <ngx-datatable-column name="Date" [width]="300"></ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
+</div>

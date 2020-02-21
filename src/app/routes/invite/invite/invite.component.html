@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card card-default">
+            <div class="card-header">
+                <div class="card-title">Your Poll List</div>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-lg-4">
+                        <input type='text' class="form-control" placeholder='Type to filter the title column...' (keyup)='updateFilter($event)' />
+                    </div>
+                </div>
+                <ngx-datatable #table class='bootstrap no-detail-row' [columns]="columns" [columnMode]="'force'" [footerHeight]="50" [selectionType]="'multi'" [rowHeight]="'auto'" [limit]="5" [rows]='rowsFilter' (activate)="onActivate($event)">
+                    <ngx-datatable-column name="Title" [width]="300"></ngx-datatable-column>
+                    <ngx-datatable-column name="Description" [width]="300"></ngx-datatable-column>
+                    <ngx-datatable-column name="Date" [width]="300"></ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div class="card card-default">
+            <div class="card-header">
+                <div class="px-2 float-right badge badge-warning">{{this.pollResNumber}}</div>
+                <!-- <div class="px-2 mr-2 float-right badge badge-success">12</div> -->
+                <div class="card-title">Response Members</div>
+            </div>
+            <!-- START list group-->
+            <scrollable class="list-group" height="360">
+                <!-- START list group item-->
+                <div class="list-group-item list-group-item-action" *ngFor="let item of selPollResMembers">
+                    <div class="media">
+                        <!-- <img class="align-self-start mx-2 circle thumb32" src="assets/img/user/02.jpg" alt="Image"> -->
+                        <div class="media-body text-truncate">
+                            <p class="mb-1">
+                                <strong class="text-primary">
+                               <span class="circle bg-success circle-lg text-left"></span>
+                               <span>{{item.user_email}}</span>
+                            </strong>
+                                <small class="ml-auto text-muted ml-2 float-right">Response on {{item.responseDate}}</small>
+                            </p>
+                            <div class="">
+                            </div>
+                            (Experiences with {{item.years}} years on {{item.experton}})
+                            <p class="mb-1 text-sm">Answer: {{item.user_answer}}
+                                <input type="button" #inviteBtn class="btn btn-secondary btn-xs float-right" value="{{item.invite_status}}" (click)="invite($event, item, inviteBtn.value)" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- END list group item-->
+            </scrollable>
+            <!-- END list group-->
+            <!-- START card footer-->
+            <div class="card-footer clearfix">
+                <div class="input-group">
+                    <input class="form-control form-control-sm" type="text" placeholder="Search members .." />
+                    <span class="input-group-btn">
+                  <button class="btn btn-secondary btn-sm" type="submit"><i class="fa fa-search"></i>
+                  </button>
+               </span>
+                </div>
+            </div>
+            <!-- END card-footer-->
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-xl-6">
+        <div class="card card-default">
+            <div class="card-header">
+                <div class="px-2 float-right badge badge-warning">{{receInviteNumber}}</div>
+                <!-- <div class="px-2 mr-2 float-right badge badge-success">12</div> -->
+                <div class="card-title">Your Invited Polls</div>
+            </div>
+            <!-- START list group-->
+            <scrollable class="list-group" height="360">
+                <!-- START list group item-->
+                <div class="list-group-item list-group-item-action" *ngFor="let item of receInviteData">
+                    <div class="media">
+                        <!-- <img class="align-self-start mx-2 circle thumb32" src="assets/img/user/02.jpg" alt="Image"> -->
+                        <div class="media-body text-truncate">
+                            <p class="mb-1">
+                                <strong class="text-primary">
+                               <span class="circle bg-success circle-lg text-left"></span>
+                               <span>{{item.user_email}}</span>
+                            </strong>
+                                <small class="ml-auto text-muted ml-2 float-right">Invite send on {{item.sendDate}}</small>
+                            </p>
+                            {{item.poll_description}}
+                            <p class="mb-1 text-sm">Answer: {{item.poll_answer}}
+                                <input *ngIf="!item.btnReject_isHidden" type="button" #rejectBtn class="btn btn-danger btn-xs float-right" style="margin-right: 10px;" value="{{item.btnRejectVal}}" (click)="reject($event, item, rejectBtn.value)" />
+                                <input *ngIf="!item.btnAccept_isHidden" type="button" #acceptBtn class="btn btn-primary btn-xs float-right" style="margin-right: 10px;" value="{{item.btnAcceptVal}}" (click)="accept($event, item, acceptBtn.value)" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- END list group item-->
+            </scrollable>
+            <!-- END list group-->
+        </div>
+    </div>
+</div>
